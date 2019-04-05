@@ -1,3 +1,4 @@
+//LISTA DUBLA CIRCULARA GESTIONATA PRIN CAP SI COADA
 #include "pch.h"
 #include <iostream>
 #include <stdio.h>
@@ -18,7 +19,9 @@ struct nodls { //pentru definirea nodului unei lista
 	nodls* prev;
 };
 
-nodls* inserare(nodls *cap, nodls**coada, produs *p)
+//inserare la sfarsit
+nodls* inserare(nodls *cap, nodls**coada, produs *p)//coada are 2 stelute pentru
+	//ca este pointer si de fiecare data se actualizeaza
 {
 	nodls* nou = (nodls*)malloc(sizeof(nodls));
 	nou->inf = (produs*)malloc(sizeof(produs));
@@ -94,6 +97,8 @@ void dezalocare(nodls* cap) {
 	free(temp);
 }
 
+//conversie din lista in vector
+//la orice functie de conversie, structura sursa trebuie sa dispara
 void conversie_lista_vector(nodls* cap,produs* *vect, int*nr) {
 	nodls* temp = cap;
 	while (temp->next != cap) {
@@ -109,7 +114,8 @@ void conversie_lista_vector(nodls* cap,produs* *vect, int*nr) {
 	free(temp);
 }
 
-void sterge_nod_denumire(nodls **cap, nodls **coada, char* den)
+//stergem un nod don lista dupa denumire
+void sterge_nod_denumire(nodls **cap, nodls **coada, char* den)//daca primul nod este cel pe care vrem sa il stergem
 {
 	if (strcmp((*cap)->inf->denumire, den) == 0)
 	{
@@ -123,7 +129,7 @@ void sterge_nod_denumire(nodls **cap, nodls **coada, char* den)
 		free(aux);
 		return; //ne scoate din functie
 	}
-	else
+	else //cautam nodul pe care vrem sa il stergem
 	{
 		nodls*temp = *cap;
 		while (temp->next != *cap)
@@ -139,11 +145,13 @@ void sterge_nod_denumire(nodls **cap, nodls **coada, char* den)
 				free(temp);
 				return;
 			}
-			else
+			else //mergem mai departe si cautam 
 			{
 				temp=temp->next;
 			}
 		}
+		//verificam daca ultimul nod este cel pe care il cautam
+		//prelucram si ultimul nod
 		if (strcmp(temp->inf->denumire, den) == 0) {
 			nodls*urmator = temp->next;
 			nodls*anterior = temp->prev;
