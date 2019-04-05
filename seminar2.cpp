@@ -88,7 +88,7 @@ using namespace std;
 //
 //}
 
-
+//--------------CAND INFORMATIA UTILA ESTE POINTER LA PRODUS (produs *inf) -------------//
 //struct produs {
 //	int cod;
 //	char * denumire;
